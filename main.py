@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title='CONTAGER', page_icon='🖇️', initial_sidebar_state='collapsed', )
+st.set_page_config(page_title='STOREACTS', page_icon='🖇️', initial_sidebar_state='collapsed', )
 hide_streamlit_style = st.markdown("""
             <style>
             #MainMenu {visibility: hidden;}
@@ -9,7 +9,7 @@ hide_streamlit_style = st.markdown("""
                 visibility: hidden;
             }
             footer:after {
-                content:'CONTAGER 🖇️'; 
+                content:'STOREACTS 🖇️'; 
                 visibility: visible;
                 display: block;
                 position: relative;
