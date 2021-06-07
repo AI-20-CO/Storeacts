@@ -2,7 +2,7 @@
 Storeacts is a simple web app which manages your contacts .
 
 ## Web App Link
-Link: [Storeacts](https://storeacts.herokuapp.com/)
+Link: [STOREACTS 🖇️](https://storeacts.herokuapp.com/)
 
 ## Installation And Usage
 1. Installation
