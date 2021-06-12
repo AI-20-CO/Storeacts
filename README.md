@@ -2,7 +2,7 @@
 Storeacts is a simple web app which manages your contacts .
 
 ## Web App Link
-Link: [STOREACTS 🖇️](https://storeacts.herokuapp.com/)
+Link: [STOREACTS 🖇️](https://share.streamlit.io/ayaan-20/storeacts/main/main.py)
 
 ## Installation And Usage
 1. Installation
