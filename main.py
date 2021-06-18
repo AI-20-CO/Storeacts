@@ -141,34 +141,34 @@ def main():
                                   'Home 🏠', 'Add ♾', 'Delete Item 🗑️', 'Change Name 🔄', 'Change Number 🔢', 'About 📜'))
 
     if select == 'Home 🏠':
-        show_contacts('C:/Users/ayaan/Phone_numbers.txt')
-        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
+        show_contacts('Phone_numbers.txt')
+        show_data_button('Phone_numbers.txt')
 
     elif select == 'Add ♾':
-        show_contacts('C:/Users/ayaan/Phone_numbers.txt')
-        update_file('C:/Users/ayaan/Phone_numbers.txt')
+        show_contacts('Phone_numbers.txt')
+        update_file('Phone_numbers.txt')
 
-        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
+        show_data_button('Phone_numbers.txt')
 
     elif select == 'Delete Item 🗑️':
-        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
+        select_search = show_contacts('Phone_numbers.txt')
         delete_item = ''
         for i in range(len(select_search)):
             if select_search[i] == ':':
                 delete_item = select_search[0:i - 1]
                 break
-        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
+        file = open('Phone_numbers.txt', 'r')
         check_read = file.read()
-        delete_item_from_file(delete_item, 'C:/Users/ayaan/Phone_numbers.txt')
+        delete_item_from_file(delete_item, 'Phone_numbers.txt')
 
-        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
+        show_data_button('Phone_numbers.txt')
 
     elif select == 'Change Name 🔄':
-        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
+        select_search = show_contacts('Phone_numbers.txt')
         change_to = st.text_input("New Name :")
         change_button = st.button('Change', key=False)
 
-        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
+        file = open('Phone_numbers.txt', 'r')
         new1 = file.readlines()
         if change_button:
             if change_to == '' or select_search == '':
@@ -188,16 +188,16 @@ def main():
                             changename_from += select_search_name_split[i] + ' '
                         break
                 changename_from = changename_from[0:len(changename_from) - 1]
-                inplace_change('C:/Users/ayaan/Phone_numbers.txt', changename_from, change_to)
+                inplace_change('Phone_numbers.txt', changename_from, change_to)
 
-        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
+        show_data_button('Phone_numbers.txt')
 
     elif select == 'Change Number 🔢':
-        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
+        select_search = show_contacts('Phone_numbers.txt')
         change_to = st.text_input("New Number :")
         change_button = st.button('Change', key=False)
 
-        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
+        file = open('Phone_numbers.txt', 'r')
         new2 = file.readlines()
         if change_button:
             if change_to == '' or select_search == '':
@@ -217,9 +217,9 @@ def main():
                             changenumber_from += select_search_number_split[i]
                         break
                 changenumber_from = changenumber_from[0:len(changenumber_from)]
-                inplace_change('C:/Users/ayaan/Phone_numbers.txt', changenumber_from, change_to)
+                inplace_change('Phone_numbers.txt', changenumber_from, change_to)
 
-        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
+        show_data_button('Phone_numbers.txt')
 
     elif select == 'About 📜':
         about_info1 = '''<div
