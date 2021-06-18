@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title='STOREACTS', page_icon='🖇️', initial_sidebar_state='collapsed', )
+st.set_page_config(page_title='Storeacts', page_icon='🖇️', initial_sidebar_state='collapsed', )
 hide_streamlit_style = st.markdown("""
             <style>
             #MainMenu {visibility: hidden;}
@@ -9,7 +9,7 @@ hide_streamlit_style = st.markdown("""
                 visibility: hidden;
             }
             footer:after {
-                content:'STOREACTS 🖇️'; 
+                content:'STOREACTS 🖇️';
                 visibility: visible;
                 display: block;
                 position: relative;
@@ -55,20 +55,20 @@ Sub_heading_design = st.markdown("""
 
 st.text('')
 st.text('')
-
+b1,b2 = st.beta_columns(2)
 def update_file(filename) -> None:
     input_user = st.text_input(f'-- Name --')
     input_no = st.text_input(f'-- Number --')
 
     file = open(filename, 'r')
-    file_read = file.read()
+    file_read = file.readlines()
     update_button = st.button('ADD', key=False)
     if update_button:
         if input_user == '':
             st.info('--- Fields Empty ---')
         elif not (input_no.isdigit()):
             st.info('--- Should be a digit ---')
-        elif input_user in file_read or input_no in file_read:
+        elif input_user+'\n' in file_read or input_no+'\n' in file_read:
             st.info('-- Name/Number Already Exists --')
         else:
             st.success('--Added--')
@@ -76,7 +76,6 @@ def update_file(filename) -> None:
             file.write(input_user + '\n')
             file.write(input_no + '\n')
             file.close()
-
 
 def delete_item_from_file(delete_item, filename):
     file = open(filename, 'r')
@@ -98,7 +97,6 @@ def delete_item_from_file(delete_item, filename):
             file.close()
             st.success('Deleted')
 
-
 def inplace_change(filename, old_string, new_string):
     f = open(filename, 'r')
     s = f.readlines()
@@ -109,7 +107,6 @@ def inplace_change(filename, old_string, new_string):
     for i in range(len(s)):
         f.write(s[i])
     f.close()
-
 
 def show_contacts(filename):
     file = open(filename, 'r')
@@ -123,21 +120,19 @@ def show_contacts(filename):
     file.close()
     return select_search
 
-
 def show_data_button(filename):
-    button_show_data_del = st.button('Show ALL', key=False)
-    if button_show_data_del:
-        file = open(filename, 'r')
-        new = file.readlines()
-        if not new:  # new == []
-            st.info('-- 0 Contacts --')
-        increment = 1
-        for i in range(0, len(new), 2):
-            organise = len(str(increment)) + 2
-            st.text(str(increment) + '. Name : ' + new[i].strip('\n') + '\n' + ' ' * organise + 'Number : ' + new[
-                i + 1].strip('\n'))
-            increment += 1
-        file.close()
+    show_data = st.beta_expander('')
+    file = open(filename, 'r')
+    new = file.readlines()
+    if not new:  # new == []
+        show_data.info('-- 0 Contacts --')
+    increment = 1
+    for i in range(0, len(new), 2):
+        organise = len(str(increment)) + 2
+        show_data.text(str(increment) + '. Name : ' + new[i].strip('\n') + '\n' + ' ' * organise + 'Number : ' + new[
+            i + 1].strip('\n'))
+        increment += 1
+    file.close()
 
 def main():
     st.sidebar.header('| NAVIGATE 🔘 |')
@@ -146,34 +141,34 @@ def main():
                                   'Home 🏠', 'Add ♾', 'Delete Item 🗑️', 'Change Name 🔄', 'Change Number 🔢', 'About 📜'))
 
     if select == 'Home 🏠':
-        show_contacts('Phone_numbers.txt')
-        show_data_button('Phone_numbers.txt')
+        show_contacts('C:/Users/ayaan/Phone_numbers.txt')
+        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
 
     elif select == 'Add ♾':
-        show_contacts('Phone_numbers.txt')
-        update_file('Phone_numbers.txt')
+        show_contacts('C:/Users/ayaan/Phone_numbers.txt')
+        update_file('C:/Users/ayaan/Phone_numbers.txt')
 
-        show_data_button('Phone_numbers.txt')
+        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
 
     elif select == 'Delete Item 🗑️':
-        select_search = show_contacts('Phone_numbers.txt')
+        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
         delete_item = ''
         for i in range(len(select_search)):
             if select_search[i] == ':':
                 delete_item = select_search[0:i - 1]
                 break
-        file = open('Phone_numbers.txt', 'r')
+        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
         check_read = file.read()
-        delete_item_from_file(delete_item, 'Phone_numbers.txt')
+        delete_item_from_file(delete_item, 'C:/Users/ayaan/Phone_numbers.txt')
 
-        show_data_button('Phone_numbers.txt')
+        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
 
     elif select == 'Change Name 🔄':
-        select_search = show_contacts('Phone_numbers.txt')
+        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
         change_to = st.text_input("New Name :")
         change_button = st.button('Change', key=False)
 
-        file = open('Phone_numbers.txt', 'r')
+        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
         new1 = file.readlines()
         if change_button:
             if change_to == '' or select_search == '':
@@ -193,16 +188,16 @@ def main():
                             changename_from += select_search_name_split[i] + ' '
                         break
                 changename_from = changename_from[0:len(changename_from) - 1]
-                inplace_change('Phone_numbers.txt', changename_from, change_to)
+                inplace_change('C:/Users/ayaan/Phone_numbers.txt', changename_from, change_to)
 
-        show_data_button('Phone_numbers.txt')
+        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
 
     elif select == 'Change Number 🔢':
-        select_search = show_contacts('Phone_numbers.txt')
+        select_search = show_contacts('C:/Users/ayaan/Phone_numbers.txt')
         change_to = st.text_input("New Number :")
         change_button = st.button('Change', key=False)
 
-        file = open('Phone_numbers.txt', 'r')
+        file = open('C:/Users/ayaan/Phone_numbers.txt', 'r')
         new2 = file.readlines()
         if change_button:
             if change_to == '' or select_search == '':
@@ -222,9 +217,9 @@ def main():
                             changenumber_from += select_search_number_split[i]
                         break
                 changenumber_from = changenumber_from[0:len(changenumber_from)]
-                inplace_change('Phone_numbers.txt', changenumber_from, change_to)
+                inplace_change('C:/Users/ayaan/Phone_numbers.txt', changenumber_from, change_to)
 
-        show_data_button('Phone_numbers.txt')
+        show_data_button('C:/Users/ayaan/Phone_numbers.txt')
 
     elif select == 'About 📜':
         about_info1 = '''<div
@@ -235,9 +230,9 @@ def main():
 
         about_info2 = '''<div
             style="background-color:#36363d;padding:10px;border-radius:9px">
-            <h2 
+            <h2
             style="color:#1BA7B5;text-align:center;font-size:20px">DEVELOPER : AYAAN IZHAR
-            </h2> 
+            </h2>
             </div> '''
         st.markdown(about_info2, unsafe_allow_html=True)
 
@@ -261,19 +256,19 @@ def main():
               height: calc(100vh - 8em);
               padding: 4em;
               color: rgba(255,255,255,.75);
-              font-family: 'Anonymous Pro', monospace;  
-              background-color: rgb(25,25,25);  
+              font-family: 'Anonymous Pro', monospace;
+              background-color: rgb(25,25,25);
             }
             .line-1{
                 position: relative;
-                top: 50%;  
+                top: 50%;
                 width: 24em;
                 margin: 0 auto;
                 border-right: 2px solid rgba(255,255,255,.75);
                 font-size: 150%;
                 white-space: nowrap;
                 overflow: hidden;
-                transform: translateY(-50%);    
+                transform: translateY(-50%);
             }
 
             /* Animation */
@@ -292,6 +287,7 @@ def main():
             </style>
             <p class="line-1 anim-typewriter">Hi , I am a high-school python web/desktop app developer. </p>
             """, unsafe_allow_html=True)
+
 main()
 Button_Design = st.markdown("""
 <style>
